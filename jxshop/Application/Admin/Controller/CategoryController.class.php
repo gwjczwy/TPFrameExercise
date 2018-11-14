@@ -3,7 +3,7 @@ namespace Admin\Controller;
 use Think\Controller;
 //分类控制器
 class CategoryController extends CommonController{
-    //实现分类的添加
+    //实现添加
     public function add(){
         if(IS_GET){
             //获取格式化之后的分类xinxi
@@ -26,6 +26,29 @@ class CategoryController extends CommonController{
                 $this->error('数据写入失败');
             }
             $this->success('写入成功');
+        }
+    }
+    //实现删除
+    public function admin(){
+        if(IS_GET){
+            //获取格式化之后的分类xinxi
+            $model=D('Category');
+            $data=$model->getCateTree();//获取格式化分类信息
+            //将信息复制给模板
+            $this->assign('cate',$data);
+            $this->display();
+        }else{
+            $id= intval(I('post.id'));
+            if($id<=0){
+                $this->error('参数错误啦~~'.$id);
+            }
+            $model=D('Category');//实例化模型对象
+            //调用模型中的删除方法实现删除
+            $res=$model->del($id);
+            if($res===false){
+                $this->error('删除失败');
+            }
+            $this->success('删除成功');
         }
     }
 }

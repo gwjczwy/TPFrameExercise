@@ -1,0 +1,29 @@
+<extend name="Public:base"/>
+<block name="description">后台管理界面</block>
+<block name="body">
+<table class="table">
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>age</th>
+            <th>operation</th>
+        </tr>'
+    <volist name="cate" id="vo"><!--  该volist标签可以被TP框架检测并  功能为自动把cate当作vo遍历 -->
+        <tr>
+            <th>{$vo.id}</th>
+            <th>{$vo.name}</th>
+            <th>{$vo.comment}</th>
+            <th><button onclick="delet('{$vo.id}')">删除</button></th>
+        </tr>
+    </volist>
+
+</table>
+</block>
+<block name="js">
+        <script>//发送评论
+            function delet(id){
+                $.post(window.location.href, {'id':id});
+                location.reload();
+            }
+        </script>
+</block>

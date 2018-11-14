@@ -13,19 +13,11 @@ class CategoryModel extends CommonModel{
     public function getCateTree(){
         //先获取所有的分类信息
         $data=$this->select();
-        //再对获取的信息进行格式化
-        $list=$this->getTree($data);
-        dump($list);  //虽然不懂原理,该行直接显示所有取出的数据
-        return $list;
+        return $data;
     }
-    //格式化分类信息      没什么用
-    public function getTree($data){
-        $list=array();//到最后直接返回该数组
-        foreach($data as $value){
-            $list[]=$value;
-        }
-        $list=$data;
-        return $list;
+    //删除评论
+    public function del($id){
+        return $this->where('id='.$id)->delete();
     }
-} 
+}
 ?>

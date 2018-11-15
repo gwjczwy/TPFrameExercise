@@ -9,11 +9,12 @@
             <th>operation</th>
         </tr>'
     <volist name="cate" id="vo"><!--  该volist标签可以被TP框架检测并  功能为自动把cate当作vo遍历 -->
-        <tr>
-            <th>{$vo.id}</th>
-            <th>{$vo.name}</th>
-            <th>{$vo.comment}</th>
-            <th><button onclick="delet('{$vo.id}')">删除</button></th>
+        <tr id="{$vo.id}">
+            <th><textarea class="id">{$vo.id}</textarea></th>
+            <th><textarea class="name">{$vo.name}</textarea></th>
+            <th><textarea class="comment">{$vo.comment}</textarea></th>
+            <th><button onclick="edit('{$vo.id}')">修改</button>
+                <button onclick="delet('{$vo.id}')">删除</button></th>
         </tr>
     </volist>
 
@@ -22,7 +23,16 @@
 <block name="js">
         <script>//发送评论
             function delet(id){
-                $.post(window.location.href, {'id':id});
+                $.post(window.location.href, {'operation':'del','id':id});
+                location.reload();
+            }
+            //修改评论
+            function edit(id){
+                id=document.getElementById(id).getElementsByClassName('id')[0].value;
+                name=document.getElementById(id).getElementsByClassName('name')[0].value;
+                comment=document.getElementById(id).getElementsByClassName('comment')[0].value;
+                // alert('id:'+id+' name:'+name+' comment:'+comment);
+                $.post(window.location.href, {'operation':'edit','id':id,'name':name,'comment':comment});
                 location.reload();
             }
         </script>

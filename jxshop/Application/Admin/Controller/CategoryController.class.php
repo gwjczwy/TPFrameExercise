@@ -37,18 +37,34 @@ class CategoryController extends CommonController{
             //将信息复制给模板
             $this->assign('cate',$data);
             $this->display();
-        }else{
-            $id= intval(I('post.id'));
-            if($id<=0){
-                $this->error('参数错误啦~~'.$id);
+        }else if(IS_POST){
+            if(I('post.operation')=='del'){
+                //删除数据
+                $id= intval(I('post.id'));
+                if($id<=0){
+                    $this->error('参数错误啦~~'.$id);
+                }
+                $model=D('Category');//实例化模型对象
+                //调用模型中的删除方法实现删除
+                $res=$model->del($id);
+                if($res===false){
+                    $this->error('删除失败');
+                }
+                $this->success('删除成功');
+            }else if(I('post.operation'=='edit')){
+                //更改数据
+                $model=D('Category');
+                $data=$model->create();
+                if(!$data){
+                    $this->error($model->getError());//打开数据库失败
+                }
+                $res=$model->update($data);
+                if($res===false){
+                    $this->error('修改失败');
+                }
+                $this->success('修改成功');
+
             }
-            $model=D('Category');//实例化模型对象
-            //调用模型中的删除方法实现删除
-            $res=$model->del($id);
-            if($res===false){
-                $this->error('删除失败');
-            }
-            $this->success('删除成功');
         }
     }
 }

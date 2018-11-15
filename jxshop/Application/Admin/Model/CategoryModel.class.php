@@ -19,5 +19,10 @@ class CategoryModel extends CommonModel{
     public function del($id){
         return $this->where('id='.$id)->delete();
     }
+    //修改评论
+    public function update($data){
+        // dump($data);exit();
+        $this->save($data);
+    }
 }
 ?>

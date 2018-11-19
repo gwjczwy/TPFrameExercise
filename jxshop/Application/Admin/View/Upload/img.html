@@ -1,0 +1,17 @@
+<extend name="Public:base"/>
+<block name="title">图片上传</block>
+<block name="description">图片上传</block>
+<block name="body" >   
+
+    <div class="container">
+        <p>{$tip}</p>
+        <form action="img" method="POST" enctype= "multipart/form-data">
+            <input type="file" name="img">
+            <input type="submit" value="提交">
+        </form>
+    </div>
+
+</block>
+<block name="js">
+
+</block>

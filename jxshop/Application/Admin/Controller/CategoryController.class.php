@@ -23,7 +23,7 @@ class CategoryController extends CommonController{
             //如果不是这样,写入数据
             $insertid=$model->add($data);//如果成功,会返回id标识
             if(!$insertid){
-                $this->error('数据写入失败');
+                $this->error('数据写入失败');                                                                   
             }
             $this->success('写入成功');
         }

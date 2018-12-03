@@ -9,10 +9,15 @@ class CategoryModel extends CommonModel{
         array('name','require','名称必须填写'),
         array('comment','require','内容必须填写'),
     );
+    public function _before_insert(&$data){
+        //钩子函数预处理数据 添加时间
+        
+    }
     //获取格式化之后的数据
     public function getCateTree(){
         //先获取所有的分类信息
         $data=$this->select();
+        dump($data);
         return $data;
     }
     //删除评论
